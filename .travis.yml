@@ -1,0 +1,27 @@
+language: cpp
+
+os:
+  - linux
+  - osx
+
+dist: bionic
+osx_image: xcode11.3
+
+addons:
+  apt:
+    packages:
+      - qtbase5-dev
+      - libqt5svg5-dev
+      - qttools5-dev-tools
+
+  homebrew:
+    packages:
+      - qt
+
+before_script:
+  - if [[ "$TRAVIS_OS_NAME" = "osx" ]]; then brew link --force qt; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then export QARGS="-qt=5"; fi
+
+script:
+  - qmake ${QARGS} -config release
+  - make -j2
