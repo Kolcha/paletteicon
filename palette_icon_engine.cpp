@@ -35,20 +35,15 @@ static QColor getIconColor(QIcon::Mode mode, QIcon::State state)
 
 PaletteIconEngine::PaletteIconEngine()
 {
-  renderer_ = new QSvgRenderer();
+  renderer_.reset(new QSvgRenderer());
 }
 
 PaletteIconEngine::PaletteIconEngine(const PaletteIconEngine& other) : QIconEngine(other)
 {
   src_file_ = other.src_file_;
-  renderer_ = new QSvgRenderer();
+  renderer_.reset(new QSvgRenderer());
   if (other.renderer_->isValid())
     renderer_->load(other.src_file_);
-}
-
-PaletteIconEngine::~PaletteIconEngine()
-{
-  delete renderer_;
 }
 
 void PaletteIconEngine::addFile(const QString& fileName, const QSize& size, QIcon::Mode mode, QIcon::State state)
