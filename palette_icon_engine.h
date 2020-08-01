@@ -40,8 +40,6 @@ public:
   void virtual_hook(int id, void* data) Q_DECL_OVERRIDE;
 
 private:
-  void paintIcon(QPainter* painter, const QRect& rect, const QColor& color);
-
   QScopedPointer<QSvgRenderer> renderer_;
   QString src_file_;
 };
