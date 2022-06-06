@@ -93,6 +93,17 @@ QIconEngine* PaletteIconEngine::clone() const
   return new PaletteIconEngine(*this);
 }
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+QList<QSize> PaletteIconEngine::availableSizes(QIcon::Mode mode, QIcon::State state) const
+#else
+QList<QSize> PaletteIconEngine::availableSizes(QIcon::Mode mode, QIcon::State state)
+#endif
+{
+  QList<QSize> sizes;
+  sizes << QSize(512, 512);     // just workaround to make tray icon visible on KDE
+  return sizes;
+}
+
 void PaletteIconEngine::paint(QPainter* painter, const QRect& rect, QIcon::Mode mode, QIcon::State state)
 {
   // "direct rendereng" using given painter is not possible
@@ -126,12 +137,6 @@ QPixmap PaletteIconEngine::pixmap(const QSize& size, QIcon::Mode mode, QIcon::St
 void PaletteIconEngine::virtual_hook(int id, void* data)
 {
   switch (id) {
-    case QIconEngine::AvailableSizesHook: {
-      QIconEngine::AvailableSizesArgument& arg = *reinterpret_cast<QIconEngine::AvailableSizesArgument*>(data);
-      arg.sizes.clear();
-      arg.sizes << QSize(512, 512);   // just workaround to make tray icon visible on KDE
-      break;
-    }
     case QIconEngine::IsNullHook:
       *reinterpret_cast<bool*>(data) = (!renderer_ || !renderer_->isValid());
       break;

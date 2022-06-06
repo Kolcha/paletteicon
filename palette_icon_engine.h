@@ -34,6 +34,12 @@ public:
 
   QIconEngine* clone() const Q_DECL_OVERRIDE;
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+  QList<QSize> availableSizes(QIcon::Mode mode, QIcon::State state) const Q_DECL_OVERRIDE;
+#else
+  QList<QSize> availableSizes(QIcon::Mode mode, QIcon::State state) Q_DECL_OVERRIDE;
+#endif
+
   void paint(QPainter* painter, const QRect& rect, QIcon::Mode mode, QIcon::State state) Q_DECL_OVERRIDE;
   QPixmap pixmap(const QSize& size, QIcon::Mode mode, QIcon::State state) Q_DECL_OVERRIDE;
 

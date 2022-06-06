@@ -37,4 +37,6 @@ Environment
 
 Tested with Qt 5.9 and above, but should work even with older versions. It even doesn't require any modern C++ features.
 
+Qt 6 is also supported, tested with 6.3.0.
+
 Tested and works fine in Linux (with different DE), Windows, macOS. It is maybe not so useful in Windows and macOS, but it should be shipped with an app, because renamed icons are not handled correctly by default [`QSvgIconEngine`](https://code.qt.io/cgit/qt/qtsvg.git/tree/src/plugins/iconengines/svgiconengine).
