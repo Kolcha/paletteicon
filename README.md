@@ -23,6 +23,8 @@ QIcon icon(":/icons/icon.svg.p");
 
 Renamed icons also can be picked from Designer.
 
+It is not strictly necessary to rename files (or assign aliases) to have one of supported extensions, it is enough "just request" such file (i.e. provide filename with desired extension, but NO such file exists) on `QIcon` creation. In such case, plugin will remove any supported extension and will use .svg file as is. This approach may be very convenient when you want to use the same image in several places but in different ways (only in some cases image must be customized).
+
 How it works
 ------------
 

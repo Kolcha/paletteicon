@@ -18,11 +18,23 @@
 
 #include "palette_icon_engine.h"
 
+#include <QFile>
 #include <QPainter>
 #include <QPalette>
 #include <QPixmapCache>
 #include <QSvgRenderer>
 
+static QString actualFilename(const QString& filename)
+{
+  if (QFile::exists(filename))
+    return filename;
+
+  QString fn = filename.mid(0, filename.lastIndexOf('.'));
+  if (QFile::exists(fn))
+    return fn;
+
+  return fn + ".svg";
+}
 
 static QColor getIconColor(QIcon::Mode mode, QIcon::State state)
 {
@@ -69,8 +81,11 @@ void PaletteIconEngine::addFile(const QString& fileName, const QSize& size, QIco
   Q_UNUSED(size);
   Q_UNUSED(mode);
   Q_UNUSED(state);
-  if (renderer_->load(fileName))
-    src_file_ = fileName;
+  QString filename = actualFilename(fileName);
+  if (filename == src_file_)
+    return;
+  if (renderer_->load(filename))
+    src_file_ = filename;
 }
 
 QIconEngine* PaletteIconEngine::clone() const
