@@ -99,6 +99,8 @@ QList<QSize> PaletteIconEngine::availableSizes(QIcon::Mode mode, QIcon::State st
 QList<QSize> PaletteIconEngine::availableSizes(QIcon::Mode mode, QIcon::State state)
 #endif
 {
+  Q_UNUSED(mode);
+  Q_UNUSED(state);
   QList<QSize> sizes;
   sizes << QSize(512, 512);     // just workaround to make tray icon visible on KDE
   return sizes;
