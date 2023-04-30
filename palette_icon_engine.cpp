@@ -81,29 +81,21 @@ void PaletteIconEngine::paint(QPainter* painter, const QRect& rect, QIcon::Mode 
   // "direct rendereng" using given painter is not possible
   // because colorization logic modifies already painted area
   // such behavior is not acceptable, so render icon to pixmap first
+  QSize size = rect.size() * painter->device()->devicePixelRatioF();
   QColor color = getIconColor(mode, state);
-  QPixmap out = renderIcon(renderer_.data(), rect.size() * painter->device()->devicePixelRatioF(), color);
-  out.setDevicePixelRatio(painter->device()->devicePixelRatioF());
-  painter->drawPixmap(rect, out);
-}
-
-QPixmap PaletteIconEngine::pixmap(const QSize& size, QIcon::Mode mode, QIcon::State state)
-{
-  QColor color = getIconColor(mode, state);
-
-  QString pmckey = QString("pie_%1:%2x%3:%4-%5%6")
+  QString pmckey = QString("pie_%1:%2x%3:%4")
                    .arg(src_file_)
                    .arg(size.width()).arg(size.height())
-                   .arg(mode)
-                   .arg(state)
                    .arg(color.name(QColor::HexArgb));
-
   QPixmap pxm;
   if (!QPixmapCache::find(pmckey, &pxm)) {
     pxm = renderIcon(renderer_.data(), size, color);
     QPixmapCache::insert(pmckey, pxm);
   }
-  return pxm;
+  // set device pixel ratio exactly before painting,
+  // this will allow to reuse the same cached pixmap
+  pxm.setDevicePixelRatio(painter->device()->devicePixelRatioF());
+  painter->drawPixmap(rect, pxm);
 }
 
 void PaletteIconEngine::addFile(const QString& fileName, const QSize& size, QIcon::Mode mode, QIcon::State state)
