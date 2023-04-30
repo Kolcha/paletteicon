@@ -30,20 +30,20 @@ public:
   PaletteIconEngine();
   PaletteIconEngine(const PaletteIconEngine& other);
 
-  void paint(QPainter* painter, const QRect& rect, QIcon::Mode mode, QIcon::State state) Q_DECL_OVERRIDE;
-  QPixmap pixmap(const QSize& size, QIcon::Mode mode, QIcon::State state) Q_DECL_OVERRIDE;
+  void paint(QPainter* painter, const QRect& rect, QIcon::Mode mode, QIcon::State state) override;
+  QPixmap pixmap(const QSize& size, QIcon::Mode mode, QIcon::State state) override;
 
-  void addFile(const QString& fileName, const QSize& size, QIcon::Mode mode, QIcon::State state) Q_DECL_OVERRIDE;
+  void addFile(const QString& fileName, const QSize& size, QIcon::Mode mode, QIcon::State state) override;
 
-  QIconEngine* clone() const Q_DECL_OVERRIDE;
+  QIconEngine* clone() const override;
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-  QList<QSize> availableSizes(QIcon::Mode mode, QIcon::State state) const Q_DECL_OVERRIDE;
+  QList<QSize> availableSizes(QIcon::Mode mode, QIcon::State state) const override;
 #else
-  QList<QSize> availableSizes(QIcon::Mode mode, QIcon::State state) Q_DECL_OVERRIDE;
+  QList<QSize> availableSizes(QIcon::Mode mode, QIcon::State state) override;
 #endif
 
-  void virtual_hook(int id, void* data) Q_DECL_OVERRIDE;
+  void virtual_hook(int id, void* data) override;
 
 private:
   QScopedPointer<QSvgRenderer> renderer_;
