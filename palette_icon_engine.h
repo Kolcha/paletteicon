@@ -16,8 +16,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef PALETTE_ICON_ENGINE_H
-#define PALETTE_ICON_ENGINE_H
+#pragma once
 
 #include <QIconEngine>
 #include <QScopedPointer>
@@ -29,6 +28,7 @@ class PaletteIconEngine : public QIconEngine
 public:
   PaletteIconEngine();
   PaletteIconEngine(const PaletteIconEngine& other);
+  ~PaletteIconEngine();
 
   void paint(QPainter* painter, const QRect& rect, QIcon::Mode mode, QIcon::State state) override;
 
@@ -49,5 +49,3 @@ private:
   QScopedPointer<QSvgRenderer> renderer_;
   QString src_file_;
 };
-
-#endif // PALETTE_ICON_ENGINE_H

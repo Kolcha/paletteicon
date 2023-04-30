@@ -76,6 +76,8 @@ PaletteIconEngine::PaletteIconEngine(const PaletteIconEngine& other) : QIconEngi
     renderer_->load(other.src_file_);
 }
 
+PaletteIconEngine::~PaletteIconEngine() = default;
+
 void PaletteIconEngine::paint(QPainter* painter, const QRect& rect, QIcon::Mode mode, QIcon::State state)
 {
   // "direct rendereng" using given painter is not possible
