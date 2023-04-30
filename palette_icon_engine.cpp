@@ -110,6 +110,11 @@ void PaletteIconEngine::addFile(const QString& fileName, const QSize& size, QIco
     src_file_ = filename;
 }
 
+QString PaletteIconEngine::key() const
+{
+  return QLatin1String("palette");
+}
+
 QIconEngine* PaletteIconEngine::clone() const
 {
   return new PaletteIconEngine(*this);

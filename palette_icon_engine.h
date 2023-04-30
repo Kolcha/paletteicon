@@ -34,6 +34,7 @@ public:
 
   void addFile(const QString& fileName, const QSize& size, QIcon::Mode mode, QIcon::State state) override;
 
+  QString key() const override;
   QIconEngine* clone() const override;
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
