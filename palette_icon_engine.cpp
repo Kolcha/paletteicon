@@ -76,36 +76,6 @@ PaletteIconEngine::PaletteIconEngine(const PaletteIconEngine& other) : QIconEngi
     renderer_->load(other.src_file_);
 }
 
-void PaletteIconEngine::addFile(const QString& fileName, const QSize& size, QIcon::Mode mode, QIcon::State state)
-{
-  Q_UNUSED(size);
-  Q_UNUSED(mode);
-  Q_UNUSED(state);
-  QString filename = actualFilename(fileName);
-  if (filename == src_file_)
-    return;
-  if (renderer_->load(filename))
-    src_file_ = filename;
-}
-
-QIconEngine* PaletteIconEngine::clone() const
-{
-  return new PaletteIconEngine(*this);
-}
-
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-QList<QSize> PaletteIconEngine::availableSizes(QIcon::Mode mode, QIcon::State state) const
-#else
-QList<QSize> PaletteIconEngine::availableSizes(QIcon::Mode mode, QIcon::State state)
-#endif
-{
-  Q_UNUSED(mode);
-  Q_UNUSED(state);
-  QList<QSize> sizes;
-  sizes << QSize(512, 512);     // just workaround to make tray icon visible on KDE
-  return sizes;
-}
-
 void PaletteIconEngine::paint(QPainter* painter, const QRect& rect, QIcon::Mode mode, QIcon::State state)
 {
   // "direct rendereng" using given painter is not possible
@@ -134,6 +104,36 @@ QPixmap PaletteIconEngine::pixmap(const QSize& size, QIcon::Mode mode, QIcon::St
     QPixmapCache::insert(pmckey, pxm);
   }
   return pxm;
+}
+
+void PaletteIconEngine::addFile(const QString& fileName, const QSize& size, QIcon::Mode mode, QIcon::State state)
+{
+  Q_UNUSED(size);
+  Q_UNUSED(mode);
+  Q_UNUSED(state);
+  QString filename = actualFilename(fileName);
+  if (filename == src_file_)
+    return;
+  if (renderer_->load(filename))
+    src_file_ = filename;
+}
+
+QIconEngine* PaletteIconEngine::clone() const
+{
+  return new PaletteIconEngine(*this);
+}
+
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+QList<QSize> PaletteIconEngine::availableSizes(QIcon::Mode mode, QIcon::State state) const
+#else
+QList<QSize> PaletteIconEngine::availableSizes(QIcon::Mode mode, QIcon::State state)
+#endif
+{
+  Q_UNUSED(mode);
+  Q_UNUSED(state);
+  QList<QSize> sizes;
+  sizes << QSize(512, 512);     // just workaround to make tray icon visible on KDE
+  return sizes;
 }
 
 void PaletteIconEngine::virtual_hook(int id, void* data)

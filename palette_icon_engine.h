@@ -30,6 +30,9 @@ public:
   PaletteIconEngine();
   PaletteIconEngine(const PaletteIconEngine& other);
 
+  void paint(QPainter* painter, const QRect& rect, QIcon::Mode mode, QIcon::State state) Q_DECL_OVERRIDE;
+  QPixmap pixmap(const QSize& size, QIcon::Mode mode, QIcon::State state) Q_DECL_OVERRIDE;
+
   void addFile(const QString& fileName, const QSize& size, QIcon::Mode mode, QIcon::State state) Q_DECL_OVERRIDE;
 
   QIconEngine* clone() const Q_DECL_OVERRIDE;
@@ -39,9 +42,6 @@ public:
 #else
   QList<QSize> availableSizes(QIcon::Mode mode, QIcon::State state) Q_DECL_OVERRIDE;
 #endif
-
-  void paint(QPainter* painter, const QRect& rect, QIcon::Mode mode, QIcon::State state) Q_DECL_OVERRIDE;
-  QPixmap pixmap(const QSize& size, QIcon::Mode mode, QIcon::State state) Q_DECL_OVERRIDE;
 
   void virtual_hook(int id, void* data) Q_DECL_OVERRIDE;
 
