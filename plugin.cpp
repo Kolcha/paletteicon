@@ -22,7 +22,7 @@
 class PaletteIconPlugin : public QIconEnginePlugin
 {
   Q_OBJECT
-  Q_PLUGIN_METADATA(IID "org.qt-project.Qt.QIconEngineFactoryInterface" FILE "paletteicon.json")
+  Q_PLUGIN_METADATA(IID QIconEngineFactoryInterface_iid FILE "paletteicon.json")
 
 public:
   QIconEngine* create(const QString& filename = QString()) Q_DECL_OVERRIDE;
