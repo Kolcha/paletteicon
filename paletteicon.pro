@@ -1,6 +1,6 @@
 #
 #   custom icon engine Qt plugin
-#   Copyright (C) 2017-2020  Nick Korotysh <nick.korotysh@gmail.com>
+#   Copyright (C) 2017-2023  Nick Korotysh <nick.korotysh@gmail.com>
 #
 #   This program is free software: you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License as published by
@@ -30,9 +30,8 @@ CONFIG += plugin
 
 DEFINES += QT_DEPRECATED_WARNINGS
 
-SOURCES += \
-    palette_icon_engine.cpp \
-    plugin.cpp
+SOURCES += plugin.cpp \
+    palette_icon_engine.cpp
 
 HEADERS += \
     palette_icon_engine.hpp
