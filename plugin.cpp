@@ -17,7 +17,7 @@
  */
 #include <QIconEnginePlugin>
 
-#include "palette_icon_engine.h"
+#include "palette_icon_engine.hpp"
 
 class PaletteIconPlugin : public QIconEnginePlugin
 {

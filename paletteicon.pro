@@ -35,7 +35,7 @@ SOURCES += \
     plugin.cpp
 
 HEADERS += \
-    palette_icon_engine.h
+    palette_icon_engine.hpp
 
 DISTFILES += paletteicon.json
 

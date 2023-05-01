@@ -16,7 +16,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "palette_icon_engine.h"
+#include "palette_icon_engine.hpp"
 
 #include <QFile>
 #include <QPainter>
