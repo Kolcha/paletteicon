@@ -31,6 +31,7 @@ public:
   ~PaletteIconEngine();
 
   void paint(QPainter* painter, const QRect& rect, QIcon::Mode mode, QIcon::State state) override;
+  QPixmap pixmap(const QSize& size, QIcon::Mode mode, QIcon::State state) override;
 
   void addFile(const QString& fileName, const QSize& size, QIcon::Mode mode, QIcon::State state) override;
 
